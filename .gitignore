@@ -1,0 +1,15 @@
+# Base de données SQLite
+*.db
+*.sqlite
+siem.db
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Node.js / React (Frontend)
+frontend/node_modules/
+frontend/dist/
+.DS_Store
