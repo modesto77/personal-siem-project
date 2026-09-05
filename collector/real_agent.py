@@ -4,7 +4,7 @@ import re
 from datetime import datetime, timezone
 
 API_URL = "http://127.0.0.1:8000/api/v1/logs"
-LOG_FILE = "app_securite.log" # Le fichier réel que nous allons surveiller sur ton PC
+LOG_FILE = "app_securite.log" # Le fichier réel que nous allons surveiller sur le PC
 
 # Regex pour comprendre un format de log spécifique. 
 # Exemple attendu : [2026-08-31 10:22:00] WARNING ssh_login_failed IP:192.168.1.50 USER:modeste
@@ -21,7 +21,7 @@ def follow_file(filepath):
             while True:
                 line = file.readline()
                 if not line:
-                    time.sleep(0.5) # Fait une pause s'il n'y a pas de nouvelle ligne
+                    time.sleep(0.5) # Pour Faire une pause s'il n'y a pas de nouvelle ligne
                     continue
                 
                 process_and_send(line.strip())
