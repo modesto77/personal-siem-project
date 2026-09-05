@@ -3,7 +3,7 @@ import time
 import random
 from datetime import datetime, timezone
 
-# L'URL de ton API locale
+# L'URL de l' API locale
 API_URL = "http://127.0.0.1:8000/api/v1/logs"
 
 # Listes de fausses données pour générer des logs réalistes
