@@ -33,7 +33,7 @@ function App() {
         <section className="alerts-section">
           <h2>Dernières Alertes ({alerts.length})</h2>
           {alerts.length === 0 ? (
-            <p>Aucune alerte pour le moment. Le système est sécurisé. ✅</p>
+            <p>Aucune alerte pour le moment. Le système est sécurisé. </p>
           ) : (
             <table>
               <thead>
