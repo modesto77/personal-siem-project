@@ -5,25 +5,25 @@ from database import engine, Base, get_db
 import models
 from engine.analyzer import analyze_log
 from fastapi import FastAPI, Depends
-from fastapi.middleware.cors import CORSMiddleware # <-- AJOUTER CECI
+from fastapi.middleware.cors import CORSMiddleware # <-- Important
 from sqlalchemy.orm import Session
-# ... (le reste de tes imports) ...
+
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="SIEM Personnel API", version="1.0.0")
 
-# --- AJOUTER CETTE CONFIGURATION CORS ---
+# --- CONFIGURATION  ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Autorise toutes les origines (pour le développement)
+    allow_origins=["*"],  # Autorise toutes les origines 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 # ----------------------------------------
 
-# Met à jour la base de données (crée la table 'alerts')
+# Mettre à jour la base de données (crée la table 'alerts')
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="SIEM Personnel API", version="1.0.0")
@@ -39,7 +39,7 @@ def receive_log(log: models.LogCreate, db: Session = Depends(get_db)):
     db.add(db_log)
     db.commit()
     
-    # 2. Analyse et sauvegarde de l'alerte si nécessaire
+    # 2. Analyse et sauvegarde de l'alerte 
     alert_data = analyze_log(log)
     
     if alert_data:
@@ -59,6 +59,6 @@ def receive_log(log: models.LogCreate, db: Session = Depends(get_db)):
 # --- NOUVELLE ROUTE POUR REACT ---
 @app.get("/api/v1/alerts")
 def get_alerts(db: Session = Depends(get_db)):
-    # Récupère les 50 dernières alertes de la base de données
+    # Récupérer les 50 dernières alertes de la base de données
     alerts = db.query(models.AlertEvent).order_by(models.AlertEvent.timestamp.desc()).limit(50).all()
     return alerts
